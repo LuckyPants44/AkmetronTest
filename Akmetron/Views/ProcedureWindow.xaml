@@ -1,0 +1,70 @@
+﻿<Window x:Class="Akmetron.Views.ProcedureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Akmetron.Views"
+        mc:Ignorable="d"
+        Title="ProcedureWindow" Height="450" Width="800" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Margin="10" Grid.Row="0" Grid.RowSpan="3">
+            <Label>Сигналы:</Label>
+            <ListView ItemsSource="{Binding Signals}" Margin="10,0,10,0" Height="340">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Type}" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Path=Frequency, StringFormat=Частота: {0} Гц}"/>
+                            <TextBlock Text="{Binding Path=Amplitude, StringFormat=Амплитуда: {0} В}"/>
+                            <TextBlock Text="{Binding Path=Duration, StringFormat=Длительность: {0} Гц}"/>
+                            <!-- Написать для нужного вида еще -->
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Margin="10" Content="Удалить сигнал"/>
+        </StackPanel>
+
+        <StackPanel Margin="10"  Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+            <Label>Добавить сигнал:</Label>
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label>Тип сигнала:</Label>
+                <ComboBox>
+                    <ComboBoxItem Content="Синусоидальный"/>
+                    <ComboBoxItem Content="FM"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label>Частота:</Label>
+                <TextBox Text="{Binding  CurrentSignal.Frequency}" Width="150"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label>Амплитуда:</Label>
+                <TextBox Text="{Binding  CurrentSignal.Amplitude}" Width="150"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label>Длительность:</Label>
+                <TextBox Text="{Binding  CurrentSignal.Duration}" Width="150"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label>Фазовый сдвиг:</Label>
+                <TextBox Width="150"></TextBox>
+            </StackPanel>
+            <Button Command="{Binding AddCommand}" Content="Добавить сигнал" Margin="10"></Button>
+        </StackPanel>
+        <StackPanel Margin="10" Grid.Row="2" Grid.Column="3">
+            <Button Content="Старт"></Button>
+            <TextBlock>0:00:00</TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>
